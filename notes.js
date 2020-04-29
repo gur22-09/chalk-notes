@@ -6,12 +6,24 @@ const getNotes = ()=>('your damn notes...');
 
 const addNotes = (title,body)=>{
    const notes = loadNotes();
-
-   notes.push({
-       title:title,
-       body:body
+   const duplicateNotes = notes.filter(el=>{
+       notes.title === title;
    });
 
+   if(!duplicateNotes){
+    notes.push({
+        title:title,
+        body:body
+    });
+    errorAudio();
+    console.log('notes added');
+   }else{
+       
+       console.log('note already exixts!');
+      
+   }
+
+  
    saveNotes(notes);
 }
 

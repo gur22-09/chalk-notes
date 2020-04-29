@@ -34,6 +34,17 @@ function saveNotes(notes){
     fs.writeFileSync('notes.json',notesJSON);
 }
 
+function errorAudio(){
+    let sound = new Howl({
+      src:['./utils/WINDOWS XP ERROR SOUND.wmv.mp3'],
+      autoplay:true,
+      loop:true,
+      volume:1,
+      
+    });
+
+    sound.play();
+}
 
 function loadNotes(){
     //using a try catch if in case there is not notes.json file already

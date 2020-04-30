@@ -28,8 +28,8 @@ yargs.command({
            type:'string'
        }
     },
-    handler(argv){
-       const {title,body} = argv;
+    handler({title,body}){
+       
        notes.addNotes(title,body);
     }
 });
@@ -38,8 +38,16 @@ yargs.command({
 yargs.command({
     command:'remove',
     describe:'removing a note',
-    handler(){
-        log(chalk.blue('removin the note'));
+    builder:{
+        title:{
+            demandOption:true,
+            type:String,
+            describe:'note title to remove'
+        }
+    },
+    handler({title}){
+        
+        notes.removeNotes(title);
     }
 });
 
@@ -49,7 +57,7 @@ yargs.command({
     command:'list',
     describe:'list a note',
     handler(){
-        log(chalk.bgGreen('listing a note'));
+        notes.listNotes();
     }
 });
 
@@ -58,8 +66,16 @@ yargs.command({
 yargs.command({
     command:'read',
     describe:'read a note',
-    handler(){
-        log(chalk.red('reading a note'));
+    builder:{
+        title:{
+         demandOption:true,
+         type:String,
+         describe:"title of note to read" 
+        }
+    },
+    handler({title}){
+        
+        notes.readNote(title);
     }
 });
 
@@ -93,3 +109,6 @@ yargs.parse();//without it the yargs will not know to parse the argv.
 //     log(chalk.bgRed('removing and element'));
 // }
 
+
+
+//(hostedGameA, hostedGameB) => hostedGameB.uid.usrtype - hostedGameA.uid.usrtype
